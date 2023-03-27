@@ -1,4 +1,4 @@
-package es.upm.etsisi.lectortelemetrias.ui.theme
+package es.upm.etsisi.lectortelemetrias.v2.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'es.upm.etsisi.lectortelemetrias'
+    namespace 'es.upm.etsisi.lectortelemetrias.v2'
     compileSdk 33
 
     defaultConfig {
-        applicationId "es.upm.etsisi.lectortelemetrias"
+        applicationId "es.upm.etsisi.lectortelemetrias.v2"
         minSdk 26
         targetSdk 33
         versionCode 1
@@ -63,6 +63,9 @@ dependencies {
 
     //navigation
     implementation "androidx.navigation:navigation-compose:$nav_version"
+
+    // Compose integration with Lifecycle
+    implementation 'androidx.lifecycle:lifecycle-runtime-compose:2.6.0'
 
     // vico
     implementation "com.patrykandpatrick.vico:core:$vico_version"
