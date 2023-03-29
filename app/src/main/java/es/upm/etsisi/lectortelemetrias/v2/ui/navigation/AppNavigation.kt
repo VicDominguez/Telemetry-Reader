@@ -8,6 +8,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import es.upm.etsisi.lectortelemetrias.v2.ui.screens.FilesList
 import es.upm.etsisi.lectortelemetrias.v2.ui.screens.MenuScreen
+import es.upm.etsisi.lectortelemetrias.v2.ui.screens.SplashScreen
 import es.upm.etsisi.lectortelemetrias.v2.ui.screens.charts.ChartScreen
 
 /**
@@ -19,8 +20,12 @@ fun AppNavigation()
 {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = AppRoutes.Menu.route)
+    NavHost(navController = navController, startDestination = AppRoutes.Splash.route)
     {
+        composable(route = AppRoutes.Splash.route)
+        {
+            SplashScreen(navController = navController)
+        }
         composable(route = AppRoutes.Menu.route)
         {
             MenuScreen(navController = navController)

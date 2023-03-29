@@ -170,7 +170,9 @@ fun DisplayChart(state: Measure,
         Chart(
             // Diagrama de linea con más espacio para que entre la marca de texto
             chart = lineChart(
+                // Espacio más grande para que entre la etiqueta de la hora
                 spacing = 48.dp,
+                // Solo sobreescribimos los rangos del eje Y si hay rango para sobreescribir
                 axisValuesOverrider = state.range?.let {
                     AxisValuesOverrider.fixed(null,null,it.lower,it.upper)
                 },

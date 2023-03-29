@@ -3,7 +3,7 @@ package es.upm.etsisi.lectortelemetrias.v2
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import com.example.compose.LectorTelemetriasTheme
+import es.upm.etsisi.lectortelemetrias.v2.ui.theme.LectorTelemetriasTheme
 import es.upm.etsisi.lectortelemetrias.v2.ui.navigation.AppNavigation
 
 class MainActivity : ComponentActivity() {

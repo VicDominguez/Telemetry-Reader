@@ -64,14 +64,17 @@ fun FilesList(navController: NavController)
                     {
                         // Para cada uno hacemos que se muestre el nombre del archivo y que si se le
                         // pulsa se navegue a la pantalla en cuestión
-                        Card {
+
+                        ElevatedCard(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable {
+                                    navController.navigate(AppRoutes.Chart.route + "/${it}")
+                                },
+                        ) {
                             Text(
                                 text = it.toString(),
-                                modifier = Modifier
-                                    .padding(16.dp)
-                                    .clickable {
-                                        navController.navigate(AppRoutes.Chart.route + "/${it}")
-                                    }
+                                modifier = Modifier.padding(16.dp)
                             )
                         }
                     }

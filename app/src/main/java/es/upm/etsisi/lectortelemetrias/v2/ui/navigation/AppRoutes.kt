@@ -6,6 +6,7 @@ package es.upm.etsisi.lectortelemetrias.v2.ui.navigation
  */
 enum class AppRoutes(val route: String)
 {
+    Splash("splash"),
     Menu("menu"),
     FilesList("files_list"),
     Chart("chart")
