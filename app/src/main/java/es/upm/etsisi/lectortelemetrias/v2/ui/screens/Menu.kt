@@ -20,12 +20,12 @@ import es.upm.etsisi.lectortelemetrias.v2.ui.navigation.AppRoutes
 @Composable
 fun MenuScreen(navController: NavController)
 {
-    Scaffold(modifier = Modifier
-        .fillMaxSize()
-        .padding(16.dp))
+    Scaffold(modifier = Modifier.fillMaxSize())
     {
         Column(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp,Alignment.CenterVertically),
             horizontalAlignment = Alignment.CenterHorizontally
         )

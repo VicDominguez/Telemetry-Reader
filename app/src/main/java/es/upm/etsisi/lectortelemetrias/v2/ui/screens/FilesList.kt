@@ -26,10 +26,8 @@ fun FilesList(navController: NavController)
     // Listado de csv disponibles
     val csvFiles = LocalContext.current.assets.list("csv")
 
-    Scaffold(modifier = Modifier.fillMaxSize())
-    {
-        Column(modifier = Modifier.fillMaxWidth())
-        {
+    Scaffold(modifier = Modifier.fillMaxSize(),
+        topBar = {
             CenterAlignedTopAppBar(
                 title = { Text(text = stringResource(id = R.string.files)) },
                 navigationIcon =
@@ -43,9 +41,19 @@ fun FilesList(navController: NavController)
                     }
                 }
             )
+        }
+    )
+    {
+        Column(modifier = Modifier
+            .fillMaxSize()
+            .padding(it), //padding para que no se superponga la cabecera
+        )
+        {
             // Como no sabemos los elementos que son, hacemos que solo se carguen los visibles
             LazyColumn(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(16.dp), //padding para que no se superponga la cabecera,
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.Top)
             )

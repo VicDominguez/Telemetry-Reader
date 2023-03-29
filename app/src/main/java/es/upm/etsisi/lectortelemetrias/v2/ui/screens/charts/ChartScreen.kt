@@ -25,6 +25,7 @@ import com.patrykandpatrick.vico.compose.m3.style.m3ChartStyle
 import com.patrykandpatrick.vico.compose.style.ProvideChartStyle
 import com.patrykandpatrick.vico.core.axis.AxisPosition
 import com.patrykandpatrick.vico.core.axis.formatter.AxisValueFormatter
+import com.patrykandpatrick.vico.core.chart.values.AxisValuesOverrider
 import com.patrykandpatrick.vico.core.entry.ChartEntryModelProducer
 import es.upm.etsisi.lectortelemetrias.v2.R
 import es.upm.etsisi.lectortelemetrias.v2.csv.Measure
@@ -49,10 +50,8 @@ fun ChartScreen(navController: NavController, filename: String)
     // Estado
     val state by viewModel.state.collectAsStateWithLifecycle()
 
-    Scaffold(modifier = Modifier.fillMaxSize())
-    {
-        Column(modifier = Modifier.fillMaxWidth())
-        {
+    Scaffold(modifier = Modifier.fillMaxSize(),
+        topBar = {
             CenterAlignedTopAppBar(
                 title = { Text(text = filename) },
                 navigationIcon =
@@ -66,6 +65,14 @@ fun ChartScreen(navController: NavController, filename: String)
                     }
                 }
             )
+        }
+    )
+    {
+        Column(modifier = Modifier
+            .fillMaxSize()
+            .padding(it), //padding para que no se superponga la cabecera
+        )
+        {
             Column(
                 modifier = Modifier.padding(16.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.Top),
@@ -162,7 +169,12 @@ fun DisplayChart(state: Measure,
     {
         Chart(
             // Diagrama de linea con más espacio para que entre la marca de texto
-            chart = lineChart(spacing = 48.dp),
+            chart = lineChart(
+                spacing = 48.dp,
+                axisValuesOverrider = state.range?.let {
+                    AxisValuesOverrider.fixed(null,null,it.lower,it.upper)
+                },
+            ),
             // Modelo de datos sacado del productor
             model = producer.getModel(),
             // Ocupar todo el espacio libre
@@ -181,6 +193,8 @@ fun DisplayChart(state: Measure,
                 titleComponent = textComponent(color = chartStyle.axis.axisLabelColor),
                 title = stringResource(id = R.string.timestamp)
             ),
+            // Poner un marcador cuando se pulsa un registro
+            marker = rememberMarker()
         )
     }
 }
