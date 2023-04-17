@@ -29,6 +29,8 @@ import com.patrykandpatrick.vico.core.chart.values.AxisValuesOverrider
 import com.patrykandpatrick.vico.core.entry.ChartEntryModelProducer
 import es.upm.etsisi.lectortelemetrias.v2.R
 import es.upm.etsisi.lectortelemetrias.v2.csv.Measure
+import es.upm.etsisi.lectortelemetrias.v2.ui.utils.Entry
+import es.upm.etsisi.lectortelemetrias.v2.ui.utils.rememberMarker
 import java.time.Instant
 import java.time.ZoneId
 import java.time.ZonedDateTime
@@ -81,7 +83,7 @@ fun ChartScreen(navController: NavController, filename: String)
                 DisplayCategoryMenu(label = stringResource(id = R.string.category),
                     options = Measure.values(),
                     selected = state,
-                    onChange = {viewModel.onCategoryChange(it)})
+                    onChange = {measure -> viewModel.onCategoryChange(measure)})
                 DisplayChart(state = state, producer = viewModel.producer)
             }
         }

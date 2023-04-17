@@ -16,7 +16,7 @@
  * Añadida únicamente documentación al propio ejemplo de la librería
  */
 
-package es.upm.etsisi.lectortelemetrias.v2.ui.screens.charts
+package es.upm.etsisi.lectortelemetrias.v2.ui.utils
 
 import android.graphics.Typeface
 import androidx.compose.material3.MaterialTheme
@@ -109,7 +109,9 @@ fun rememberMarker(): Marker
                 indicatorSizeDp = INDICATOR_SIZE_DP
                 // Se cambia el color para ser el mismo que el de la grafica (más útil en barras)
                 onApplyEntryColor = { entryColor ->
-                    indicatorOuterComponent.color = entryColor.copyColor(INDICATOR_OUTER_COMPONENT_ALPHA)
+                    indicatorOuterComponent.color = entryColor.copyColor(
+                        INDICATOR_OUTER_COMPONENT_ALPHA
+                    )
                     with(indicatorCenterComponent) {
                         color = entryColor
                         setShadow(radius = INDICATOR_CENTER_COMPONENT_SHADOW_RADIUS, color = entryColor)

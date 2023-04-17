@@ -7,6 +7,7 @@ import com.patrykandpatrick.vico.core.entry.ChartEntryModelProducer
 import es.upm.etsisi.lectortelemetrias.v2.csv.CSVEntry
 import es.upm.etsisi.lectortelemetrias.v2.csv.Measure
 import es.upm.etsisi.lectortelemetrias.v2.csv.readCsv
+import es.upm.etsisi.lectortelemetrias.v2.ui.utils.Entry
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
