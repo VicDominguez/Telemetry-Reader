@@ -1,4 +1,4 @@
-package es.upm.etsisi.lectortelemetrias.v2.csv
+package es.upm.etsisi.lectortelemetrias.csv
 
 import android.util.Range
 

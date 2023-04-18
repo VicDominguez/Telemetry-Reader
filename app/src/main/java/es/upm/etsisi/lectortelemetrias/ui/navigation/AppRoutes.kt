@@ -1,4 +1,4 @@
-package es.upm.etsisi.lectortelemetrias.v2.ui.navigation
+package es.upm.etsisi.lectortelemetrias.ui.navigation
 
 /**
  * Listado con las rutas de la app

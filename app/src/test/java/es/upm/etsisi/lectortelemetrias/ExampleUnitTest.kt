@@ -1,4 +1,4 @@
-package es.upm.etsisi.lectortelemetrias.v2
+package es.upm.etsisi.lectortelemetrias
 
 import org.junit.Test
 

@@ -1,4 +1,4 @@
-package es.upm.etsisi.lectortelemetrias.v2.ui.screens
+package es.upm.etsisi.lectortelemetrias.ui.screens
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.clickable
@@ -13,10 +13,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import es.upm.etsisi.lectortelemetrias.v2.R
-import es.upm.etsisi.lectortelemetrias.v2.ui.navigation.AppRoutes
+import androidx.navigation.compose.rememberNavController
+import es.upm.etsisi.lectortelemetrias.R
+import es.upm.etsisi.lectortelemetrias.ui.navigation.AppRoutes
+import es.upm.etsisi.lectortelemetrias.ui.theme.LectorTelemetriasTheme
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -81,5 +84,16 @@ fun FilesList(navController: NavController)
                 }
             }
         }
+    }
+}
+
+@Preview
+@Composable
+fun FilesListPreview()
+{
+    val navController = rememberNavController()
+    LectorTelemetriasTheme()
+    {
+        FilesList(navController = navController)
     }
 }

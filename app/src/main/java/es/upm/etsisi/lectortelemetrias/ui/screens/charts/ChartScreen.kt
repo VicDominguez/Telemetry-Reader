@@ -1,4 +1,4 @@
-package es.upm.etsisi.lectortelemetrias.v2.ui.screens.charts
+package es.upm.etsisi.lectortelemetrias.ui.screens.charts
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
@@ -10,11 +10,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.patrykandpatrick.vico.compose.axis.axisLabelComponent
 import com.patrykandpatrick.vico.compose.axis.horizontal.bottomAxis
 import com.patrykandpatrick.vico.compose.axis.vertical.startAxis
@@ -27,10 +29,11 @@ import com.patrykandpatrick.vico.core.axis.AxisPosition
 import com.patrykandpatrick.vico.core.axis.formatter.AxisValueFormatter
 import com.patrykandpatrick.vico.core.chart.values.AxisValuesOverrider
 import com.patrykandpatrick.vico.core.entry.ChartEntryModelProducer
-import es.upm.etsisi.lectortelemetrias.v2.R
-import es.upm.etsisi.lectortelemetrias.v2.csv.Measure
-import es.upm.etsisi.lectortelemetrias.v2.ui.utils.Entry
-import es.upm.etsisi.lectortelemetrias.v2.ui.utils.rememberMarker
+import es.upm.etsisi.lectortelemetrias.R
+import es.upm.etsisi.lectortelemetrias.csv.Measure
+import es.upm.etsisi.lectortelemetrias.ui.theme.LectorTelemetriasTheme
+import es.upm.etsisi.lectortelemetrias.ui.utils.Entry
+import es.upm.etsisi.lectortelemetrias.ui.utils.rememberMarker
 import java.time.Instant
 import java.time.ZoneId
 import java.time.ZonedDateTime
@@ -211,5 +214,16 @@ fun Measure.label(): Int
         Measure.Temperature -> R.string.temperature
         Measure.CO2 -> R.string.co2
         Measure.Volatiles -> R.string.volatiles
+    }
+}
+
+@Preview
+@Composable
+fun ChartScreenPreview()
+{
+    val navController = rememberNavController()
+    LectorTelemetriasTheme()
+    {
+        ChartScreen(navController = navController, filename = "losdelfondo-2022-3-25.csv")
     }
 }

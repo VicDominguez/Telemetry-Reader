@@ -1,4 +1,4 @@
-package es.upm.etsisi.lectortelemetrias.v2.ui.screens
+package es.upm.etsisi.lectortelemetrias.ui.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -15,10 +15,13 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import es.upm.etsisi.lectortelemetrias.v2.R
-import es.upm.etsisi.lectortelemetrias.v2.ui.navigation.AppRoutes
+import androidx.navigation.compose.rememberNavController
+import es.upm.etsisi.lectortelemetrias.ui.navigation.AppRoutes
+import es.upm.etsisi.lectortelemetrias.R
+import es.upm.etsisi.lectortelemetrias.ui.theme.LectorTelemetriasTheme
 import kotlinx.coroutines.delay
 
 @Composable
@@ -40,7 +43,7 @@ fun SplashScreen(navController: NavController)
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(16.dp,Alignment.CenterVertically)
     ) {
-        Image(painter = painterResource(id = R.drawable.app_logo),
+        Image(painter = painterResource(id = R.drawable.logo_defecto),
             contentDescription = "Logo aplicación",
             modifier = Modifier.fillMaxSize(0.5F))
         Text(text = stringResource(id = R.string.app_name),
@@ -53,5 +56,16 @@ fun SplashScreen(navController: NavController)
                 )
             )
         )
+    }
+}
+
+@Preview
+@Composable
+fun SplashScreenPreview()
+{
+    val navController = rememberNavController()
+    LectorTelemetriasTheme()
+    {
+        SplashScreen(navController = navController)
     }
 }

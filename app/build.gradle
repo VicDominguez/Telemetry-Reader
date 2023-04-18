@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'es.upm.etsisi.lectortelemetrias.v2'
+    namespace 'es.upm.etsisi.lectortelemetrias'
     compileSdk 33
 
     defaultConfig {
-        applicationId "es.upm.etsisi.lectortelemetrias.v2"
+        applicationId "es.upm.etsisi.lectortelemetrias"
         minSdk 26
         targetSdk 33
         versionCode 1

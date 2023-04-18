@@ -1,4 +1,4 @@
-package es.upm.etsisi.lectortelemetrias.v2.ui.navigation
+package es.upm.etsisi.lectortelemetrias.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavType
@@ -6,10 +6,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import es.upm.etsisi.lectortelemetrias.v2.ui.screens.FilesList
-import es.upm.etsisi.lectortelemetrias.v2.ui.screens.MenuScreen
-import es.upm.etsisi.lectortelemetrias.v2.ui.screens.SplashScreen
-import es.upm.etsisi.lectortelemetrias.v2.ui.screens.charts.ChartScreen
+import es.upm.etsisi.lectortelemetrias.ui.screens.FilesList
+import es.upm.etsisi.lectortelemetrias.ui.screens.MenuScreen
+import es.upm.etsisi.lectortelemetrias.ui.screens.SplashScreen
+import es.upm.etsisi.lectortelemetrias.ui.screens.charts.ChartScreen
 
 /**
  * Implementación de las rutas del sistema

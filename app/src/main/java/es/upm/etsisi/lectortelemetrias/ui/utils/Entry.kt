@@ -1,4 +1,4 @@
-package es.upm.etsisi.lectortelemetrias.v2.ui.utils
+package es.upm.etsisi.lectortelemetrias.ui.utils
 
 import com.patrykandpatrick.vico.core.entry.ChartEntry
 

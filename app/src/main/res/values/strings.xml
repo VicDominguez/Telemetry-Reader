@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Lector de Telemetrias v2</string>
+    <string name="app_name">Lector de Telemetrias</string>
     <string name="welcome_text">Bienvenido al lector de telemetrías</string>
     <string name="select_file">Seleccionar archivo</string>
     <string name="files">Archivos</string>
