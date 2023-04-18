@@ -26,10 +26,8 @@ fun AppNavigation()
         {
             SplashScreen(navController = navController)
         }
-        composable(route = AppRoutes.Menu.route)
-        {
-            MenuScreen(navController = navController)
-        }
+        // TODO Apartado 5.3 - Indicación de como procesar la ruta de menú
+
         composable(route = AppRoutes.FilesList.route)
         {
             FilesList(navController = navController)

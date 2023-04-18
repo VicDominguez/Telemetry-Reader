@@ -24,6 +24,8 @@ import com.patrykandpatrick.vico.compose.chart.Chart
 import com.patrykandpatrick.vico.compose.chart.line.lineChart
 import com.patrykandpatrick.vico.compose.component.textComponent
 import com.patrykandpatrick.vico.compose.m3.style.m3ChartStyle
+import com.patrykandpatrick.vico.compose.style.ChartStyle
+import com.patrykandpatrick.vico.compose.style.LocalChartStyle
 import com.patrykandpatrick.vico.compose.style.ProvideChartStyle
 import com.patrykandpatrick.vico.core.axis.AxisPosition
 import com.patrykandpatrick.vico.core.axis.formatter.AxisValueFormatter
@@ -87,7 +89,7 @@ fun ChartScreen(navController: NavController, filename: String)
                     options = Measure.values(),
                     selected = state,
                     onChange = {measure -> viewModel.onCategoryChange(measure)})
-                DisplayChart(state = state, producer = viewModel.producer)
+                //TODO Apartado 14 - Mostrar gráfica
             }
         }
     }
@@ -133,21 +135,9 @@ private fun DisplayCategoryMenu(label: String,
             expanded = expanded,
             // Para cerrar el desplegable al pulsar fuera
             onDismissRequest = { expanded = false },
-        ) {
-            // Para cada medida hay una opción
-            options.forEach { selectionOption ->
-                DropdownMenuItem(
-                    // Texto para cada opción
-                    text = { Text(text = stringResource(id = selectionOption.label())) },
-                    onClick = {
-                        // Al pulsar se cierra el menú y se cambie en el viewmodel la opción
-                        expanded = false
-                        onChange(selectionOption)
-                    },
-                    // Padding del desplegable
-                    contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding,
-                )
-            }
+        )
+        {
+            // TODO Apartado 13 - Mostrar las opciones del desplegable
         }
     }
 }
@@ -156,8 +146,8 @@ private fun DisplayCategoryMenu(label: String,
 fun DisplayChart(state: Measure,
                  producer : ChartEntryModelProducer)
 {
-    // Estilo de material design 3
-    val chartStyle = m3ChartStyle()
+    // TODO Apartado 16 - Aplicar estilo material design 3
+    val chartStyle = LocalChartStyle.current
 
     // Se le recuerda porque no va a mutar entre los cambios
     val dtf = remember { DateTimeFormatter.ofPattern("HH:mm:ss") }
@@ -189,7 +179,7 @@ fun DisplayChart(state: Measure,
             // Eje de la izq tiene como titulo la categoria
             startAxis = startAxis(
                 titleComponent = textComponent(color = chartStyle.axis.axisLabelColor),
-                title = stringResource(id = state.label())
+                //TODO Apartado 18 - Titulo de la opcion seleccionada
             ),
             bottomAxis = bottomAxis(
                 // Reducimos el tamaño del texto
@@ -198,7 +188,7 @@ fun DisplayChart(state: Measure,
                 valueFormatter = valueFormatter,
                 // El titulo del eje es timestamp
                 titleComponent = textComponent(color = chartStyle.axis.axisLabelColor),
-                title = stringResource(id = R.string.timestamp)
+                //TODO Apartado 17 - Titulo del pie de gráfica
             ),
             // Poner un marcador cuando se pulsa un registro
             marker = rememberMarker()
@@ -227,3 +217,5 @@ fun ChartScreenPreview()
         ChartScreen(navController = navController, filename = "losdelfondo-2022-3-25.csv")
     }
 }
+
+// TODO opcional - Preview modo oscuro

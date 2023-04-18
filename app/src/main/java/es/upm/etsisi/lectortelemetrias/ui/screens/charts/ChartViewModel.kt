@@ -57,32 +57,13 @@ class ChartViewModel(assetManager: AssetManager, filename: String) : ViewModel()
     private fun updateProducer()
     {
         // Segun la categoria metemos en las y unos datos u otros
-        val entries = when(_state.value)
-        {
-            Measure.Temperature -> data.mapIndexed { index, csvEntry ->
-                Entry(timestamp = csvEntry.timestamp,
-                    x = index.toFloat(),
-                    y = csvEntry.temperatura
-                )
-            }
-            Measure.Humidity -> data.mapIndexed { index, csvEntry ->
-                Entry(timestamp = csvEntry.timestamp,
-                    x = index.toFloat(),
-                    y = csvEntry.humedad
-                )
-            }
-            Measure.CO2 -> data.mapIndexed { index, csvEntry ->
-                Entry(timestamp = csvEntry.timestamp,
-                    x = index.toFloat(),
-                    y = csvEntry.co2
-                )
-            }
-            Measure.Volatiles -> data.mapIndexed { index, csvEntry ->
-                Entry(timestamp = csvEntry.timestamp,
-                    x = index.toFloat(),
-                    y = csvEntry.volatiles
-                )
-            }
+
+        // TODO Apartado 15 - Cambiar los datos según el TODO Apartado
+        val entries = data.mapIndexed { index, csvEntry ->
+            Entry(timestamp = csvEntry.timestamp,
+                x = index.toFloat(),
+                y = csvEntry.temperatura
+            )
         }
 
         // Actualizamos las entradas del productor

@@ -7,7 +7,7 @@ package es.upm.etsisi.lectortelemetrias.ui.navigation
 enum class AppRoutes(val route: String)
 {
     Splash("splash"),
-    Menu("menu"),
+    // TODO Apartado 5.2 - Declarar la ruta de menú
     FilesList("files_list"),
     Chart("chart")
 }

@@ -39,11 +39,7 @@ fun MenuScreen(navController: NavController)
             Text(text = stringResource(R.string.welcome_text),
                 style = MaterialTheme.typography.titleMedium
             )
-            // Al pulsar el botón nos vemos a la pantalla de FilesList
-            Button(onClick = { navController.navigate(AppRoutes.FilesList.route) })
-            {
-                Text(text = stringResource(R.string.select_file))
-            }
+            // TODO Apartados 6 y 7 - Botón que aparezca y que se navegue a la ventana de archivos
         }
     }
 }

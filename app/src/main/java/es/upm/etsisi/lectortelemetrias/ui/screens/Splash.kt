@@ -33,7 +33,7 @@ fun SplashScreen(navController: NavController)
 
         navController.popBackStack()
 
-        navController.navigate(AppRoutes.Menu.route)
+        // TODO Apartado 5.1 - navegación al menú
     }
 
     Column(
@@ -43,9 +43,11 @@ fun SplashScreen(navController: NavController)
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(16.dp,Alignment.CenterVertically)
     ) {
+        // TODO Apartado 3 - Icono custom en lugar del de por defecto
         Image(painter = painterResource(id = R.drawable.logo_defecto),
             contentDescription = "Logo aplicación",
             modifier = Modifier.fillMaxSize(0.5F))
+        // TODO Apartado 4 - Texto custom en lugar del de por defecto
         Text(text = stringResource(id = R.string.app_name),
             color = MaterialTheme.colorScheme.onPrimary,
             style = MaterialTheme.typography.headlineMedium.copy(
