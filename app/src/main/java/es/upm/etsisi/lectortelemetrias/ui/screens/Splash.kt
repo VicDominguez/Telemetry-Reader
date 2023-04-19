@@ -33,7 +33,7 @@ fun SplashScreen(navController: NavController)
 
         navController.popBackStack()
 
-        // TODO Apartado 5.1 - navegación al menú
+        // TODO Apartado 5.3 - navegación al menú
     }
 
     Column(
@@ -43,21 +43,8 @@ fun SplashScreen(navController: NavController)
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(16.dp,Alignment.CenterVertically)
     ) {
-        // TODO Apartado 3 - Icono custom en lugar del de por defecto
-        Image(painter = painterResource(id = R.drawable.logo_defecto),
-            contentDescription = "Logo aplicación",
-            modifier = Modifier.fillMaxSize(0.5F))
-        // TODO Apartado 4 - Texto custom en lugar del de por defecto
-        Text(text = stringResource(id = R.string.app_name),
-            color = MaterialTheme.colorScheme.onPrimary,
-            style = MaterialTheme.typography.headlineMedium.copy(
-                shadow = Shadow(
-                    color = MaterialTheme.colorScheme.onBackground,
-                    offset = Offset(4f, 4f),
-                    blurRadius = 8f
-                )
-            )
-        )
+        // TODO Apartado 3 - Icono de la aplicación
+        // TODO Apartado 4 - Texto de bienvenida
     }
 }
 

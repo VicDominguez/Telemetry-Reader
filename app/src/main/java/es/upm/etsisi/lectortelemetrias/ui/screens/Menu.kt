@@ -40,6 +40,7 @@ fun MenuScreen(navController: NavController)
                 style = MaterialTheme.typography.titleMedium
             )
             // TODO Apartados 6 y 7 - Botón que aparezca y que se navegue a la ventana de archivos
+
         }
     }
 }
