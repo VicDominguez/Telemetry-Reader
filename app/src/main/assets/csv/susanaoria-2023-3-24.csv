@@ -1,0 +1,4 @@
+id_nodo; timestamp; temperatura; humedad; CO2; volatiles
+susanaoria;1682334404689;26.00;36.00;448.00;7.00
+susanaoria;1682334419993;26.00;36.00;526.00;19.00
+susanaoria;1682334435429;26.00;38.00;428.00;4.00

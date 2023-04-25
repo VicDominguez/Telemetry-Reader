@@ -58,13 +58,15 @@ class ChartViewModel(assetManager: AssetManager, filename: String) : ViewModel()
     {
         // Segun la categoria metemos en las y unos datos u otros
 
-        // TODO Apartado 15 - Cambiar los datos según el TODO Apartado
-        val entries = data.mapIndexed { index, csvEntry ->
+        var entries = data.mapIndexed { index, csvEntry ->
             Entry(timestamp = csvEntry.timestamp,
                 x = index.toFloat(),
                 y = csvEntry.temperatura
             )
         }
+
+        // TODO Apartado 13 - Cambiar los datos según la opcion del desplegable
+
 
         // Actualizamos las entradas del productor
         producer.setEntries(entries)

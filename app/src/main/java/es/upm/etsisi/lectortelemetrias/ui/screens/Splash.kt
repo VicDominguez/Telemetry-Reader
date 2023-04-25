@@ -34,6 +34,8 @@ fun SplashScreen(navController: NavController)
         navController.popBackStack()
 
         // TODO Apartado 5.3 - navegación al menú
+
+
     }
 
     Column(
@@ -44,7 +46,11 @@ fun SplashScreen(navController: NavController)
         verticalArrangement = Arrangement.spacedBy(16.dp,Alignment.CenterVertically)
     ) {
         // TODO Apartado 3 - Icono de la aplicación
+
+
         // TODO Apartado 4 - Texto de bienvenida
+
+
     }
 }
 

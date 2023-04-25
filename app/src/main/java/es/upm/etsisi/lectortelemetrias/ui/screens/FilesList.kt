@@ -26,17 +26,17 @@ import es.upm.etsisi.lectortelemetrias.ui.theme.LectorTelemetriasTheme
 @Composable
 fun FilesList(navController: NavController)
 {
-    // TODO Apartado 11 - Sacar los ficheros csv en la pantalla
+    var csvFiles : Array<String>? = null
+    // TODO Apartado 10 - Sacar los ficheros csv en la pantalla
     // Nota: para ver el resultado, ejecutar la app o la preview en el simulador
     // (no se ve en la preview del modo split)
 
-    val csvFiles : Array<String>? = null
+
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        // TODO Apartado 8 - Poner barra de superior con texto
-        // TODO Apartado 9 - Añadir a la barra el icono de navegación hacia atrás
-        // TODO Apartado 10 - Volver atrás pulsando en el icono
+        // TODO Apartado 8 - Poner barra de superior con texto.
+
     )
     {
         Column(modifier = Modifier
@@ -63,8 +63,12 @@ fun FilesList(navController: NavController)
                         ElevatedCard(
                             modifier = Modifier
                                 .fillMaxWidth()
-                            // TODO Apartado 12 - Navegar a la ventana de la gráfica al pulsar
-                        ) {
+                            // TODO Apartado 11 - Navegar a la ventana de la gráfica al pulsar
+                                .clickable {
+                                    navController.navigate(AppRoutes.Chart.route + "/$it")
+                                },
+
+                            ) {
                             Text(
                                 text = it.toString(),
                                 modifier = Modifier.padding(16.dp)

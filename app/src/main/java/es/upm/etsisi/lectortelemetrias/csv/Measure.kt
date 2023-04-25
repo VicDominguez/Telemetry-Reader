@@ -10,6 +10,6 @@ enum class Measure(val range: Range<Float>?) {
     Humidity(Range(0f, 100f)),
     // 400 - 32768 rango completo
     // https://www.sciosense.com/wp-content/uploads/documents/SC-001232-DS-3-CCS811B-Datasheet-Revision-2.pdf
-    CO2(Range(400f, 2000f)),
+    CO2(null),
     Volatiles(null),
 }

@@ -89,7 +89,7 @@ fun ChartScreen(navController: NavController, filename: String)
                     options = Measure.values(),
                     selected = state,
                     onChange = {measure -> viewModel.onCategoryChange(measure)})
-                //TODO Apartado 14 - Mostrar gráfica
+                DisplayChart(state = state, producer = viewModel.producer)
             }
         }
     }
@@ -137,7 +137,8 @@ private fun DisplayCategoryMenu(label: String,
             onDismissRequest = { expanded = false },
         )
         {
-            // TODO Apartado 13 - Mostrar las opciones del desplegable
+            // TODO Apartado 12 - Mostrar las opciones del desplegable
+
         }
     }
 }
@@ -146,8 +147,8 @@ private fun DisplayCategoryMenu(label: String,
 fun DisplayChart(state: Measure,
                  producer : ChartEntryModelProducer)
 {
-    // TODO Apartado 16 - Aplicar estilo material design 3
-    val chartStyle = LocalChartStyle.current
+    var chartStyle = LocalChartStyle.current
+    // TODO Apartado 14 - Aplicar estilo material design 3
 
     // Se le recuerda porque no va a mutar entre los cambios
     val dtf = remember { DateTimeFormatter.ofPattern("HH:mm:ss") }
@@ -179,7 +180,8 @@ fun DisplayChart(state: Measure,
             // Eje de la izq tiene como titulo la categoria
             startAxis = startAxis(
                 titleComponent = textComponent(color = chartStyle.axis.axisLabelColor),
-                //TODO Apartado 18 - Titulo de la opcion seleccionada
+                //TODO Apartado 16 - Titulo de la opcion seleccionada
+
             ),
             bottomAxis = bottomAxis(
                 // Reducimos el tamaño del texto
@@ -188,7 +190,8 @@ fun DisplayChart(state: Measure,
                 valueFormatter = valueFormatter,
                 // El titulo del eje es timestamp
                 titleComponent = textComponent(color = chartStyle.axis.axisLabelColor),
-                //TODO Apartado 17 - Titulo del pie de gráfica
+                //TODO Apartado 15 - Titulo del pie de gráfica
+
             ),
             // Poner un marcador cuando se pulsa un registro
             marker = rememberMarker()
@@ -217,5 +220,3 @@ fun ChartScreenPreview()
         ChartScreen(navController = navController, filename = "losdelfondo-2022-3-25.csv")
     }
 }
-
-// TODO opcional - Preview modo oscuro
