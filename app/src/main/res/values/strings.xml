@@ -1,13 +1,13 @@
 <resources>
-    <string name="app_name">Lector de Telemetrias</string>
-    <string name="welcome_text">Bienvenido al lector de telemetrías</string>
-    <string name="select_file">Seleccionar archivo</string>
-    <string name="files">Archivos</string>
-    <string name="timestamp">Marca de tiempo</string>
-    <string name="humidity">Humedad</string>
-    <string name="temperature">Temperatura</string>
+    <string name="app_name">Telemetry Reader</string>
+    <string name="welcome_text">Welcome to telemetry reader</string>
+    <string name="select_file">Select file</string>
+    <string name="files">Files</string>
+    <string name="timestamp">Timestamp</string>
+    <string name="humidity">Humidity</string>
+    <string name="temperature">Temperature</string>
     <string name="co2">CO2</string>
     <string name="volatiles">Volatiles</string>
-    <string name="category">Categoria</string>
-    <string name="go_back">Volver atrás</string>
+    <string name="category">Category</string>
+    <string name="go_back">Return back</string>
 </resources>

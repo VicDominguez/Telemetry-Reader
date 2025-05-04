@@ -16,7 +16,7 @@
  * Añadida únicamente documentación al propio ejemplo de la librería
  */
 
-package es.upm.etsisi.lectortelemetrias.ui.utils
+package es.upm.etsisi.telemetryreader.ui.utils
 
 import android.graphics.Typeface
 import androidx.compose.material3.MaterialTheme

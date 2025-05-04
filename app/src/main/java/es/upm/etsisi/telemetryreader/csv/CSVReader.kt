@@ -1,4 +1,4 @@
-package es.upm.etsisi.lectortelemetrias.csv
+package es.upm.etsisi.telemetryreader.csv
 
 import java.io.InputStream
 

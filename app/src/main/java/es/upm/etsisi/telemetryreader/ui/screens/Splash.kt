@@ -1,4 +1,4 @@
-package es.upm.etsisi.lectortelemetrias.ui.screens
+package es.upm.etsisi.telemetryreader.ui.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -19,9 +19,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import es.upm.etsisi.lectortelemetrias.ui.navigation.AppRoutes
-import es.upm.etsisi.lectortelemetrias.R
-import es.upm.etsisi.lectortelemetrias.ui.theme.LectorTelemetriasTheme
+import es.upm.etsisi.telemetryreader.R
+import es.upm.etsisi.telemetryreader.ui.navigation.AppRoutes
+import es.upm.etsisi.telemetryreader.ui.theme.TelemetryReaderTheme
 import kotlinx.coroutines.delay
 
 @Composable
@@ -33,8 +33,7 @@ fun SplashScreen(navController: NavController)
 
         navController.popBackStack()
 
-        // TODO Apartado 5.3 - navegación al menú
-
+        navController.navigate(AppRoutes.Menu.route)
 
     }
 
@@ -45,12 +44,20 @@ fun SplashScreen(navController: NavController)
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(16.dp,Alignment.CenterVertically)
     ) {
-        // TODO Apartado 3 - Icono de la aplicación
+        Image(painter = painterResource(id = R.drawable.logo_defecto),
+            contentDescription = "Logo aplicación",
+            modifier = Modifier.fillMaxSize(0.5F))
 
-
-        // TODO Apartado 4 - Texto de bienvenida
-
-
+        Text(text = stringResource(id = R.string.app_name),
+            color = MaterialTheme.colorScheme.onPrimary,
+            style = MaterialTheme.typography.headlineMedium.copy(
+                shadow = Shadow(
+                    color = MaterialTheme.colorScheme.onBackground,
+                    offset = Offset(4f, 4f),
+                    blurRadius = 8f
+                )
+            )
+        )
     }
 }
 
@@ -59,7 +66,7 @@ fun SplashScreen(navController: NavController)
 fun SplashScreenPreview()
 {
     val navController = rememberNavController()
-    LectorTelemetriasTheme()
+    TelemetryReaderTheme()
     {
         SplashScreen(navController = navController)
     }

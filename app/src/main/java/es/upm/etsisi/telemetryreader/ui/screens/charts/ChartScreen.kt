@@ -1,4 +1,4 @@
-package es.upm.etsisi.lectortelemetrias.ui.screens.charts
+package es.upm.etsisi.telemetryreader.ui.screens.charts
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
@@ -24,18 +24,16 @@ import com.patrykandpatrick.vico.compose.chart.Chart
 import com.patrykandpatrick.vico.compose.chart.line.lineChart
 import com.patrykandpatrick.vico.compose.component.textComponent
 import com.patrykandpatrick.vico.compose.m3.style.m3ChartStyle
-import com.patrykandpatrick.vico.compose.style.ChartStyle
-import com.patrykandpatrick.vico.compose.style.LocalChartStyle
 import com.patrykandpatrick.vico.compose.style.ProvideChartStyle
 import com.patrykandpatrick.vico.core.axis.AxisPosition
 import com.patrykandpatrick.vico.core.axis.formatter.AxisValueFormatter
 import com.patrykandpatrick.vico.core.chart.values.AxisValuesOverrider
 import com.patrykandpatrick.vico.core.entry.ChartEntryModelProducer
-import es.upm.etsisi.lectortelemetrias.R
-import es.upm.etsisi.lectortelemetrias.csv.Measure
-import es.upm.etsisi.lectortelemetrias.ui.theme.LectorTelemetriasTheme
-import es.upm.etsisi.lectortelemetrias.ui.utils.Entry
-import es.upm.etsisi.lectortelemetrias.ui.utils.rememberMarker
+import es.upm.etsisi.telemetryreader.R
+import es.upm.etsisi.telemetryreader.csv.Measure
+import es.upm.etsisi.telemetryreader.ui.theme.TelemetryReaderTheme
+import es.upm.etsisi.telemetryreader.ui.utils.Entry
+import es.upm.etsisi.telemetryreader.ui.utils.rememberMarker
 import java.time.Instant
 import java.time.ZoneId
 import java.time.ZonedDateTime
@@ -137,8 +135,19 @@ private fun DisplayCategoryMenu(label: String,
             onDismissRequest = { expanded = false },
         )
         {
-            // TODO Apartado 12 - Mostrar las opciones del desplegable
-
+            options.forEach { selectionOption ->
+                DropdownMenuItem(
+                    // Texto para cada opción
+                    text = { Text(text = stringResource(id = selectionOption.label())) },
+                    onClick = {
+                        // Al pulsar se cierra el menú y se cambie en el viewmodel la opción
+                        expanded = false
+                        onChange(selectionOption)
+                    },
+                    // Padding del desplegable
+                    contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding,
+                )
+            }
         }
     }
 }
@@ -147,8 +156,7 @@ private fun DisplayCategoryMenu(label: String,
 fun DisplayChart(state: Measure,
                  producer : ChartEntryModelProducer)
 {
-    var chartStyle = LocalChartStyle.current
-    // TODO Apartado 14 - Aplicar estilo material design 3
+    val chartStyle =  m3ChartStyle()
 
     // Se le recuerda porque no va a mutar entre los cambios
     val dtf = remember { DateTimeFormatter.ofPattern("HH:mm:ss") }
@@ -180,8 +188,7 @@ fun DisplayChart(state: Measure,
             // Eje de la izq tiene como titulo la categoria
             startAxis = startAxis(
                 titleComponent = textComponent(color = chartStyle.axis.axisLabelColor),
-                //TODO Apartado 16 - Titulo de la opcion seleccionada
-
+                title = stringResource(id = state.label())
             ),
             bottomAxis = bottomAxis(
                 // Reducimos el tamaño del texto
@@ -190,8 +197,7 @@ fun DisplayChart(state: Measure,
                 valueFormatter = valueFormatter,
                 // El titulo del eje es timestamp
                 titleComponent = textComponent(color = chartStyle.axis.axisLabelColor),
-                //TODO Apartado 15 - Titulo del pie de gráfica
-
+                title = stringResource(id = R.string.timestamp)
             ),
             // Poner un marcador cuando se pulsa un registro
             marker = rememberMarker()
@@ -215,7 +221,7 @@ fun Measure.label(): Int
 fun ChartScreenPreview()
 {
     val navController = rememberNavController()
-    LectorTelemetriasTheme()
+    TelemetryReaderTheme()
     {
         ChartScreen(navController = navController, filename = "losdelfondo-2022-3-25.csv")
     }

@@ -1,4 +1,4 @@
-package es.upm.etsisi.lectortelemetrias.ui.theme
+package es.upm.etsisi.telemetryreader.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

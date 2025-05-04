@@ -1,4 +1,4 @@
-package es.upm.etsisi.lectortelemetrias.ui.theme
+package es.upm.etsisi.telemetryreader.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
@@ -73,7 +73,7 @@ private val DarkColors = darkColorScheme(
 )
 
 @Composable
-fun LectorTelemetriasTheme(
+fun TelemetryReaderTheme(
     useDarkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {

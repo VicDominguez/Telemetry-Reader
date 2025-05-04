@@ -1,4 +1,4 @@
-package es.upm.etsisi.lectortelemetrias.ui.screens
+package es.upm.etsisi.telemetryreader.ui.screens
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
@@ -13,9 +13,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import es.upm.etsisi.lectortelemetrias.R
-import es.upm.etsisi.lectortelemetrias.ui.navigation.AppRoutes
-import es.upm.etsisi.lectortelemetrias.ui.theme.LectorTelemetriasTheme
+import es.upm.etsisi.telemetryreader.R
+import es.upm.etsisi.telemetryreader.ui.navigation.AppRoutes
+import es.upm.etsisi.telemetryreader.ui.theme.TelemetryReaderTheme
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -39,9 +39,10 @@ fun MenuScreen(navController: NavController)
             Text(text = stringResource(R.string.welcome_text),
                 style = MaterialTheme.typography.titleMedium
             )
-            // TODO Apartados 6 y 7 - Botón que aparezca y que se navegue a la ventana de archivos
-
-
+            Button(onClick = { navController.navigate(AppRoutes.FilesList.route) })
+            {
+                Text(text = stringResource(R.string.select_file))
+            }
         }
     }
 }
@@ -51,7 +52,7 @@ fun MenuScreen(navController: NavController)
 fun MenuScreenPreview()
 {
     val navController = rememberNavController()
-    LectorTelemetriasTheme()
+    TelemetryReaderTheme()
     {
         MenuScreen(navController = navController)
     }

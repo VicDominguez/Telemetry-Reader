@@ -1,13 +1,13 @@
-package es.upm.etsisi.lectortelemetrias.ui.screens.charts
+package es.upm.etsisi.telemetryreader.ui.screens.charts
 
 import android.content.res.AssetManager
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.patrykandpatrick.vico.core.entry.ChartEntryModelProducer
-import es.upm.etsisi.lectortelemetrias.csv.CSVEntry
-import es.upm.etsisi.lectortelemetrias.csv.Measure
-import es.upm.etsisi.lectortelemetrias.csv.readCsv
-import es.upm.etsisi.lectortelemetrias.ui.utils.Entry
+import es.upm.etsisi.telemetryreader.csv.CSVEntry
+import es.upm.etsisi.telemetryreader.csv.Measure
+import es.upm.etsisi.telemetryreader.csv.readCsv
+import es.upm.etsisi.telemetryreader.ui.utils.Entry
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -57,17 +57,39 @@ class ChartViewModel(assetManager: AssetManager, filename: String) : ViewModel()
     private fun updateProducer()
     {
         // Segun la categoria metemos en las y unos datos u otros
+        val entries = when(_state.value) {
+            Measure.Temperature -> data.mapIndexed { index, csvEntry ->
+                Entry(
+                    timestamp = csvEntry.timestamp,
+                    x = index.toFloat(),
+                    y = csvEntry.temperatura
+                )
+            }
 
-        var entries = data.mapIndexed { index, csvEntry ->
-            Entry(timestamp = csvEntry.timestamp,
-                x = index.toFloat(),
-                y = csvEntry.temperatura
-            )
+            Measure.Humidity -> data.mapIndexed { index, csvEntry ->
+                Entry(
+                    timestamp = csvEntry.timestamp,
+                    x = index.toFloat(),
+                    y = csvEntry.humedad
+                )
+            }
+
+            Measure.CO2 -> data.mapIndexed { index, csvEntry ->
+                Entry(
+                    timestamp = csvEntry.timestamp,
+                    x = index.toFloat(),
+                    y = csvEntry.co2
+                )
+            }
+
+            Measure.Volatiles -> data.mapIndexed { index, csvEntry ->
+                Entry(
+                    timestamp = csvEntry.timestamp,
+                    x = index.toFloat(),
+                    y = csvEntry.volatiles
+                )
+            }
         }
-
-        // TODO Apartado 13 - Cambiar los datos según la opcion del desplegable
-
-
         // Actualizamos las entradas del productor
         producer.setEntries(entries)
     }

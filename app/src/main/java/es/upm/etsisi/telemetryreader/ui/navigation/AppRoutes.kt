@@ -1,4 +1,4 @@
-package es.upm.etsisi.lectortelemetrias.ui.navigation
+package es.upm.etsisi.telemetryreader.ui.navigation
 
 /**
  * Listado con las rutas de la app
@@ -7,10 +7,7 @@ package es.upm.etsisi.lectortelemetrias.ui.navigation
 enum class AppRoutes(val route: String)
 {
     Splash("splash"),
-    // TODO Apartado 5.1 - Declarar la ruta de menú
-
-
-
+    Menu("menu"),
     FilesList("files_list"),
     Chart("chart")
 }
