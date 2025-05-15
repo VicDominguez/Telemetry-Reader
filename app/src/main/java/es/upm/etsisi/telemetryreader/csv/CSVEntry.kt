@@ -1,19 +1,19 @@
 package es.upm.etsisi.telemetryreader.csv
 
 /**
- * Formato de las filas de los csv
- * @param idNodo: String con el id del nodo que produjo el dato
- * @param timestamp: Marca de tiempo del registro
- * @param temperatura: Temperatura recogida del sensor
- * @param humedad: Humedad recogida del sensor
- * @param co2: C02 recogida del sensor
- * @param volatiles
+ * Format of the csv rows
+ * @param idNode: String with the id of the node that produced the data.
+ * @param timestamp: Timestamp when data was read.
+ * @param temperature: Temperature collected from the sensor.
+ * @param humidity: Humidity collected from the sensor.
+ * @param co2: C02 collected from sensor.
+ * @param volatiles: A random float value
  */
 data class CSVEntry(
-    val idNodo : String,
+    val idNode : String,
     val timestamp: Long,
-    val temperatura: Float,
-    val humedad: Float,
+    val temperature: Float,
+    val humidity: Float,
     val co2: Float,
     val volatiles: Float
 )

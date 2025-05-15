@@ -43,12 +43,8 @@ import com.patrykandpatrick.vico.core.extension.copyColor
 import com.patrykandpatrick.vico.core.marker.Marker
 
 @Composable
-fun rememberMarker(): Marker
-{
-    // Fondo del bocadillo
-    // Color de fondo
+fun rememberMarker(): Marker {
     val labelBackgroundColor = MaterialTheme.colorScheme.surface
-    // Componente de forma del fondo con su color y su radio de curvatura
     val labelBackground = remember(labelBackgroundColor) {
         ShapeComponent(labelBackgroundShape, labelBackgroundColor.toArgb()).setShadow(
             radius = LABEL_BACKGROUND_SHADOW_RADIUS,
@@ -56,7 +52,8 @@ fun rememberMarker(): Marker
             applyElevationOverlay = true,
         )
     }
-    // Etiqueta dentro del bocadillo del marcador
+
+    // Label inside marker
     val label = textComponent(
         background = labelBackground,
         lineCount = LABEL_LINE_COUNT,
@@ -64,23 +61,21 @@ fun rememberMarker(): Marker
         typeface = Typeface.MONOSPACE,
     )
 
-    // Elementos del indicador (circulos concentricos)
-    // Anillo interno
+    // Ring indicators
     val indicatorInnerComponent = shapeComponent(
         shape = Shapes.pillShape,
         color = MaterialTheme.colorScheme.surface
     )
-    // Anillo central
     val indicatorCenterComponent = shapeComponent(
         shape = Shapes.pillShape,
         color = Color.White
     )
-    // Anillo externo
     val indicatorOuterComponent = shapeComponent(
         shape = Shapes.pillShape,
         color = Color.White
     )
-    // Elemento indicador al completo
+
+    // Full indicator
     val indicator = overlayingComponent(
         outer = indicatorOuterComponent,
         inner = overlayingComponent(
@@ -91,27 +86,22 @@ fun rememberMarker(): Marker
         innerPaddingAll = indicatorCenterAndOuterComponentPaddingValue,
     )
 
-    // Linea de guia que es paralela al eje y
+    // Guideline parallel to Y axis
     val guideline = lineComponent(
-        // Color con transparencia inversamente proporcional a alpha
-        // (0% totalmente transparente, 100% no transparente)
+        // Color is alpha proportionally inverse (0% fully transparent, 100% opaque)
         color = MaterialTheme.colorScheme.onSurface.copy(alpha = GUIDELINE_ALPHA),
-        // Ancho de la linea
         thickness = guidelineThickness,
-
         shape = guidelineShape,
     )
 
     return remember(label, indicator, guideline) {
         object : MarkerComponent(label, indicator, guideline) {
             init {
-                // Se le pone al arrancar el tamaño del indicador
+                // Set indicator size
                 indicatorSizeDp = INDICATOR_SIZE_DP
-                // Se cambia el color para ser el mismo que el de la grafica (más útil en barras)
+                // Change color to use the same as chart
                 onApplyEntryColor = { entryColor ->
-                    indicatorOuterComponent.color = entryColor.copyColor(
-                        INDICATOR_OUTER_COMPONENT_ALPHA
-                    )
+                    indicatorOuterComponent.color = entryColor.copyColor(alpha = INDICATOR_OUTER_COMPONENT_ALPHA)
                     with(indicatorCenterComponent) {
                         color = entryColor
                         setShadow(radius = INDICATOR_CENTER_COMPONENT_SHADOW_RADIUS, color = entryColor)
@@ -119,7 +109,7 @@ fun rememberMarker(): Marker
                 }
             }
 
-            // Función para poner el indicador justo por encima de la gráfica, donde el eje superior
+            // Set indicator just above graphic, where upper shaft is
             override fun getInsets(context: MeasureContext, outInsets: Insets, segmentProperties: SegmentProperties) =
                 with(context) {
                     outInsets.top = label.getHeight(context) + labelBackgroundShape.tickSizeDp.pixels +
@@ -130,7 +120,7 @@ fun rememberMarker(): Marker
     }
 }
 
-// Constantes del marcador
+// Marker constraints
 
 private const val LABEL_BACKGROUND_SHADOW_RADIUS = 4f
 private const val LABEL_BACKGROUND_SHADOW_DY = 2f

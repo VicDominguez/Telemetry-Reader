@@ -12,7 +12,7 @@ import es.upm.etsisi.telemetryreader.ui.screens.SplashScreen
 import es.upm.etsisi.telemetryreader.ui.screens.charts.ChartScreen
 
 /**
- * Implementación de las rutas del sistema
+ * Navigation graph implementation
  * @see AppRoutes
  */
 @Composable
@@ -36,9 +36,10 @@ fun AppNavigation()
         }
         composable(
             route = AppRoutes.Chart.route + "/{filename}",
-            arguments = listOf(navArgument(name = "filename") {type = NavType.StringType}))
+            arguments = listOf(navArgument(name = "filename") {type = NavType.StringType})
+        )
         {
-            //si efectivamente tenemos el parámetro filename, abrimos la ventana de gráficas
+            // If filename was received, move to chart screen with that
             it.arguments?.getString("filename")?.let { filename ->
                 ChartScreen(navController = navController, filename = filename)
             }

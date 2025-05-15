@@ -2,8 +2,16 @@ package es.upm.etsisi.telemetryreader.ui.screens
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,23 +28,23 @@ import es.upm.etsisi.telemetryreader.ui.theme.TelemetryReaderTheme
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MenuScreen(navController: NavController)
-{
-    Scaffold(modifier = Modifier.fillMaxSize())
-    {
+fun MenuScreen(navController: NavController) {
+    Scaffold(modifier = Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp,Alignment.CenterVertically),
+            verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
             horizontalAlignment = Alignment.CenterHorizontally
         )
         {
             Image(
                 modifier = Modifier.fillMaxWidth(0.75f),
                 painter = painterResource(id = R.drawable.logo_escuela),
-                contentDescription = "logo")
-            Text(text = stringResource(R.string.welcome_text),
+                contentDescription = "logo"
+            )
+            Text(
+                text = stringResource(R.string.welcome_text),
                 style = MaterialTheme.typography.titleMedium
             )
             Button(onClick = { navController.navigate(AppRoutes.FilesList.route) })
@@ -49,8 +57,7 @@ fun MenuScreen(navController: NavController)
 
 @Preview
 @Composable
-fun MenuScreenPreview()
-{
+fun MenuScreenPreview() {
     val navController = rememberNavController()
     TelemetryReaderTheme()
     {

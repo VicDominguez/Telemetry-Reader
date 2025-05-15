@@ -1,13 +1,22 @@
 package es.upm.etsisi.telemetryreader.ui.screens
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
-import androidx.compose.material3.*
+import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -21,60 +30,54 @@ import es.upm.etsisi.telemetryreader.R
 import es.upm.etsisi.telemetryreader.ui.navigation.AppRoutes
 import es.upm.etsisi.telemetryreader.ui.theme.TelemetryReaderTheme
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FilesList(navController: NavController)
-{
+fun FilesList(navController: NavController) {
     // List local csv
     val csvFiles = LocalContext.current.assets.list("csv")
 
-    Scaffold(modifier = Modifier.fillMaxSize(),
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
         topBar = {
             CenterAlignedTopAppBar(
                 title = { Text(text = stringResource(id = R.string.files)) },
-                navigationIcon =
+                navigationIcon = {
+                    IconButton(onClick = { navController.popBackStack() })
                     {
-                        IconButton(onClick = { navController.popBackStack() })
-                        {
-                            Icon(
-                                imageVector = Icons.Rounded.ArrowBack,
-                                contentDescription = stringResource(id = R.string.go_back)
-                            )
-                        }
+                        Icon(
+                            imageVector = Icons.Rounded.ArrowBack,
+                            contentDescription = stringResource(id = R.string.go_back)
+                        )
                     }
+                }
             )
         }
     )
     {
-        Column(modifier = Modifier
-            .fillMaxSize()
-            .padding(it), //padding para que no se superponga la cabecera
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(it),
         )
         {
-            // Como no sabemos los elementos que son, hacemos que solo se carguen los visibles
+            // Plot only visible data
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(16.dp), //padding para que no se superponga la cabecera,
+                    .padding(16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.Top)
             )
             {
-                // Si el listado no es nulo, lo pintamos
                 csvFiles?.let { files ->
                     items(files)
                     {
-                        // Para cada uno hacemos que se muestre el nombre del archivo y que si se le
-                        // pulsa se navegue a la pantalla en cuestión
-
+                        // For each of them, plot filename and if user clicks on it, navigate to corresponding screen
                         ElevatedCard(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .clickable {
-                                    navController.navigate(AppRoutes.Chart.route + "/${it}")
-                                },
-                            ) {
+                                .clickable { navController.navigate(AppRoutes.Chart.route + "/${it}") },
+                        ) {
                             Text(
                                 text = it.toString(),
                                 modifier = Modifier.padding(16.dp)
@@ -89,8 +92,7 @@ fun FilesList(navController: NavController)
 
 @Preview
 @Composable
-fun FilesListPreview()
-{
+fun FilesListPreview() {
     val navController = rememberNavController()
     TelemetryReaderTheme()
     {

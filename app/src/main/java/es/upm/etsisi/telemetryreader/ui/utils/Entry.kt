@@ -3,7 +3,7 @@ package es.upm.etsisi.telemetryreader.ui.utils
 import com.patrykandpatrick.vico.core.entry.ChartEntry
 
 /**
- * Tipo de entrada para la gráfica que añade el timestamp para poder mostrarlo
+ * Plot entry type in order to add timestamp
  */
 class Entry(
     val timestamp: Long,

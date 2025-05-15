@@ -1,11 +1,26 @@
 package es.upm.etsisi.telemetryreader.ui.screens.charts
 
-import android.annotation.SuppressLint
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.ExposedDropdownMenuDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -39,54 +54,57 @@ import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ChartScreen(navController: NavController, filename: String)
-{
-    // ViewModel de la pantalla
-    val viewModel : ChartViewModel = viewModel(
+fun ChartScreen(navController: NavController, filename: String) {
+    val viewModel: ChartViewModel = viewModel(
         factory = ChartViewModel.Factory(
             assetManager = LocalContext.current.assets,
             filename = filename
         )
     )
 
-    // Estado
     val state by viewModel.state.collectAsStateWithLifecycle()
 
-    Scaffold(modifier = Modifier.fillMaxSize(),
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
         topBar = {
             CenterAlignedTopAppBar(
                 title = { Text(text = filename) },
                 navigationIcon =
-                {
-                    IconButton(onClick = { navController.popBackStack() })
                     {
-                        Icon(
-                            imageVector = Icons.Rounded.ArrowBack,
-                            contentDescription = stringResource(id = R.string.go_back)
-                        )
+                        IconButton(onClick = { navController.popBackStack() })
+                        {
+                            Icon(
+                                imageVector = Icons.Rounded.ArrowBack,
+                                contentDescription = stringResource(id = R.string.go_back)
+                            )
+                        }
                     }
-                }
             )
         }
     )
     {
-        Column(modifier = Modifier
-            .fillMaxSize()
-            .padding(it), //padding para que no se superponga la cabecera
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(it),
         )
         {
             Column(
                 modifier = Modifier.padding(16.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.Top),
-                horizontalAlignment = Alignment.CenterHorizontally)
+                horizontalAlignment = Alignment.CenterHorizontally
+            )
             {
-                DisplayCategoryMenu(label = stringResource(id = R.string.category),
+                DisplayCategoryMenu(
+                    label = stringResource(id = R.string.category),
                     options = Measure.values(),
                     selected = state,
-                    onChange = {measure -> viewModel.onCategoryChange(measure)})
+                    onChange = { measure ->
+                        viewModel.onCategoryChange(measure)
+                    }
+                )
                 DisplayChart(state = state, producer = viewModel.producer)
             }
         }
@@ -95,56 +113,46 @@ fun ChartScreen(navController: NavController, filename: String)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun DisplayCategoryMenu(label: String,
-                                options: Array<Measure>,
-                                selected : Measure,
-                                onChange: (Measure) -> Unit,
-                                modifier: Modifier = Modifier,
-)
-{
+private fun DisplayCategoryMenu(
+    label: String,
+    options: Array<Measure>,
+    selected: Measure,
+    onChange: (Measure) -> Unit,
+    modifier: Modifier = Modifier,
+) {
     var expanded by remember { mutableStateOf(false) }
 
-    // Punto de entrada al menú
+    //Menu entry point
     ExposedDropdownMenuBox(
         expanded = expanded,
         onExpandedChange = { expanded = !expanded },
         modifier = modifier
     ) {
-        // Elemento visible del menú en todo momento
         TextField(
-            // El `menuAnchor` se le tiene que pasar para que se vea correctamente el campo.
             modifier = Modifier.menuAnchor(),
-            // Campo de solo lectura
+            // Ready only field
             readOnly = true,
-            // Texto a mostrar
             value = stringResource(id = selected.label()),
-            // Como no hay cambio de valor al ser solo lectura, la función es vacía
+            // Ready only field
             onValueChange = {},
-            // Encabezado de la sección
             label = { Text(text = label) },
-            // Icono en el campo de texto
             trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
-            // Colores del campo de texto
             colors = ExposedDropdownMenuDefaults.textFieldColors(),
         )
 
-        // Opciones del menú
+        // Menu options
         ExposedDropdownMenu(
             expanded = expanded,
-            // Para cerrar el desplegable al pulsar fuera
             onDismissRequest = { expanded = false },
         )
         {
             options.forEach { selectionOption ->
                 DropdownMenuItem(
-                    // Texto para cada opción
                     text = { Text(text = stringResource(id = selectionOption.label())) },
                     onClick = {
-                        // Al pulsar se cierra el menú y se cambie en el viewmodel la opción
                         expanded = false
                         onChange(selectionOption)
                     },
-                    // Padding del desplegable
                     contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding,
                 )
             }
@@ -153,62 +161,57 @@ private fun DisplayCategoryMenu(label: String,
 }
 
 @Composable
-fun DisplayChart(state: Measure,
-                 producer : ChartEntryModelProducer)
-{
-    val chartStyle =  m3ChartStyle()
+fun DisplayChart(
+    state: Measure,
+    producer: ChartEntryModelProducer
+) {
+    val chartStyle = m3ChartStyle()
 
-    // Se le recuerda porque no va a mutar entre los cambios
+    // It will be a constant between recompositions
     val dtf = remember { DateTimeFormatter.ofPattern("HH:mm:ss") }
 
     val valueFormatter = AxisValueFormatter<AxisPosition.Horizontal.Bottom> { index, chartValues ->
-        // Con el indice se accede al listado de entradas y con el timestamp se saca su formateo
+        // With index we can select proper entry and with timestamp format can be obtained
         (chartValues.chartEntryModel.entries.first().getOrNull(index.toInt()) as? Entry)
             ?.timestamp
-            ?.run { dtf.format(ZonedDateTime.ofInstant(Instant.ofEpochMilli(this), ZoneId.systemDefault())) }
+            ?.run {
+                dtf.format(ZonedDateTime.ofInstant(Instant.ofEpochMilli(this), ZoneId.systemDefault()))
+            }
             .orEmpty()
     }
 
     ProvideChartStyle(chartStyle)
     {
         Chart(
-            // Diagrama de linea con más espacio para que entre la marca de texto
             chart = lineChart(
-                // Espacio más grande para que entre la etiqueta de la hora
                 spacing = 48.dp,
-                // Solo sobreescribimos los rangos del eje Y si hay rango para sobreescribir
+                // Onverride only if a range is available
                 axisValuesOverrider = state.range?.let {
-                    AxisValuesOverrider.fixed(null,null,it.lower,it.upper)
+                    AxisValuesOverrider.fixed(null, null, it.lower, it.upper)
                 },
             ),
-            // Modelo de datos sacado del productor
             model = producer.getModel(),
-            // Ocupar todo el espacio libre
             modifier = Modifier.fillMaxSize(),
-            // Eje de la izq tiene como titulo la categoria
+            // Left axis with category as title
             startAxis = startAxis(
                 titleComponent = textComponent(color = chartStyle.axis.axisLabelColor),
                 title = stringResource(id = state.label())
             ),
             bottomAxis = bottomAxis(
-                // Reducimos el tamaño del texto
                 label = axisLabelComponent(textSize = 10f.sp),
-                // Formateador para poner a cada dato su fecha
+                // Formatter to set timestamp for each value
                 valueFormatter = valueFormatter,
-                // El titulo del eje es timestamp
                 titleComponent = textComponent(color = chartStyle.axis.axisLabelColor),
                 title = stringResource(id = R.string.timestamp)
             ),
-            // Poner un marcador cuando se pulsa un registro
+            // Set a mark when user touch it
             marker = rememberMarker()
         )
     }
 }
 
-fun Measure.label(): Int
-{
-    return when(this)
-    {
+fun Measure.label(): Int {
+    return when (this) {
         Measure.Humidity -> R.string.humidity
         Measure.Temperature -> R.string.temperature
         Measure.CO2 -> R.string.co2
@@ -218,8 +221,7 @@ fun Measure.label(): Int
 
 @Preview
 @Composable
-fun ChartScreenPreview()
-{
+fun ChartScreenPreview() {
     val navController = rememberNavController()
     TelemetryReaderTheme()
     {

@@ -25,8 +25,7 @@ import es.upm.etsisi.telemetryreader.ui.theme.TelemetryReaderTheme
 import kotlinx.coroutines.delay
 
 @Composable
-fun SplashScreen(navController: NavController)
-{
+fun SplashScreen(navController: NavController) {
     LaunchedEffect(true)
     {
         delay(1000)
@@ -42,13 +41,16 @@ fun SplashScreen(navController: NavController)
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.primary),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(16.dp,Alignment.CenterVertically)
+        verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically)
     ) {
-        Image(painter = painterResource(id = R.drawable.logo_defecto),
-            contentDescription = "Logo aplicación",
-            modifier = Modifier.fillMaxSize(0.5F))
+        Image(
+            painter = painterResource(id = R.drawable.logo_defecto),
+            contentDescription = "App logo",
+            modifier = Modifier.fillMaxSize(0.5F)
+        )
 
-        Text(text = stringResource(id = R.string.app_name),
+        Text(
+            text = stringResource(id = R.string.app_name),
             color = MaterialTheme.colorScheme.onPrimary,
             style = MaterialTheme.typography.headlineMedium.copy(
                 shadow = Shadow(
@@ -63,8 +65,7 @@ fun SplashScreen(navController: NavController)
 
 @Preview
 @Composable
-fun SplashScreenPreview()
-{
+fun SplashScreenPreview() {
     val navController = rememberNavController()
     TelemetryReaderTheme()
     {
